@@ -1,0 +1,27 @@
+<div class="article half_width border">
+    <h1>Log in</h1>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="callout panel">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true %>
+     
+
+      
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off"%>
+      
+
+      <% if devise_mapping.rememberable? -%>
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+      <% end -%>
+      </div>
+      <%= f.submit "Log in" , class: "button" %>
+
+      
+    <% end %>
+    <div class="callout panel">
+    <%= render "devise/shared/links" %>
+    </div>
+</div>

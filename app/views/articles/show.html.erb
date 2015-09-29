@@ -1,0 +1,19 @@
+<%= render @article , dashboard: false %>
+<div class="callout panel">
+	<h6>Tags</h6>
+	<% @article.tags.each do |tag| %>
+		<p>
+			<%= link_to tag.name , tag %>
+		</p>
+	<% end %>
+</div>
+<%= link_to "Editar", edit_article_path(@article), method: :get , class:"button" %>
+
+<div class="panel" id="comments-box">
+	<%= render @article.comment %>
+</div>
+
+<div class="callout panel">
+	<%= render "comments/form" %>
+</div>
+

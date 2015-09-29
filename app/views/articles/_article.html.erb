@@ -1,0 +1,26 @@
+<article>
+	<div class="col s12">
+		<h3><%= link_to article.title , article %></h3>
+		<p>
+		<% unless article.user.nil? %>
+		Written by: <%= article.user.email %> - 
+		<% end %>
+		Visits: <%= article.visits_count %>
+		</p>
+	</div>
+	<div class="col s12">
+		<div class="col s6"><%= article.body.html_safe %>
+		</div>
+		<div class="col s6"><%= image_tag article.cover(:thumb) , class:"responsive-img" %>
+		</div>
+	</div>
+</article>
+<% if dashboard == true %>
+	<div class="callout panel">
+		<%= link_to "Delete" , article , method: :delete , class:"small radius button" %>
+		<% if article.may_publish? %>
+		<%= link_to "Publish" , "articles/#{article.id}/publish" , method: :put , class:"small radius button" %>
+		<% end %>
+	</div>
+<% end %>
+<hr>

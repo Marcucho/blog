@@ -1,0 +1,44 @@
+<% if @article.errors.full_messages.length > 0 %>
+<div class="callout panel">
+	<% @article.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+</div>
+<% end %>
+	<div class="row">
+	<h1><%= name %> Article</h1>
+		<%= form_for(@article, html: {id: "article_form"}) do |f| %>
+			<div class="callout panel">
+				<%= f.text_field :title , placeholder:"Title" %>
+				Attachment: <%= f.file_field :cover %>
+			</div>
+			<%= f.hidden_field :body %>
+			<%= f.hidden_field :markup_content %>
+
+			<div id="epiceditor" style: "height: 250px;"></div>
+			</br>
+			<div class="callout panel" >
+			<h6>Tags</h6>
+				<% @tags.each do |tag| %>
+					<%= check_box_tag "tags[]" , tag.id %> <%= tag.name %>
+				<% end %>
+			</div>
+			<%= f.submit "Save Article" , class:"button" %>
+		<% end %>
+	</div>
+
+<script>
+	var editor = new EpicEditor({
+		textarea: "article_markup_content",
+		file:{
+			name: "editor_body"
+		}
+	});
+
+	editor.load();
+
+	$("#article_form").on("submit",function(){
+		$("#article_body").val( editor.exportFile("editor_body","html"))
+		$("#article_markup_content").val( editor.exportFile("editor_body"))
+	});
+</script>

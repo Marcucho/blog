@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <header>
+   <ul id="nav-mobile" class="side-nav fixed">
+     <li class="bold">
+      <% if user_signed_in? %>
+			<%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+			<% else %>
+				<%= link_to "Log In" , user_session_path , class:"light-blue-text text-lighten-1"%>
+			<% end %>
+     </li>
+     <li class="bold"><%= link_to "News" , articles_path %></li>
+     <li class="bold"><%= link_to "Create" , new_article_path , method: :get %></li>
+     <li class="bold"><%= link_to "Dashboard"  , dashboard_path %></li>
+    </ul>
+  </header>
+     
+  <nav class="light-blue lighten-1" role="navigation">
+  <div class="nav-wrapper container">
+  </div>
+  </nav>
+     
+      <main>
+        
+        <div class="container">
+
+        <% unless (notice.nil? && alert.nil?) %>
+        <div class="row">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+        </div>
+        <% end %>
+
+        <div class="row">
+          <div class="section col s12 m9 l10">
+    		    <%= yield %>
+          </div>
+        </div>
+
+        </div>
+     
+
+     
+        
+     
+          <h5>Tags</h5>
+          <ul>
+	            <% @tags.each do |tag| %>
+					<li>
+						<%= link_to tag.name, tag %>
+					</li>
+				<% end %>
+          </ul>
+     
+         
+      </main>
+     
+      <footer class="page-footer light-blue lighten-1">
+        <ul>
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+        </ul>
+      </footer>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<div class="callout panel">
+	<h1><%= @tag.name %></h1>
+	<%= link_to 'Edit', edit_tag_path(@tag) , class:"small radius button" %>
+	<%= link_to 'Back', tags_path , class:"small radius button" %>
+</div>
+<%= render @tag.articles , dashboard: false %>
+<%= render "partials/paginate_footer" %>

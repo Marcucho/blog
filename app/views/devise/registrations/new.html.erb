@@ -1,0 +1,28 @@
+<div class="new_form  half_width border">
+      <h1>Sign up</h1>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="callout panel">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true %>
+        
+
+        
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "off"%>
+        
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        </div>
+        <hr>
+        <%= f.submit "Sign up" , class: "button" %>
+      <% end %>
+        <div class="callout panel">
+          <%= render "devise/shared/links" %>
+        </div>
+</div>
